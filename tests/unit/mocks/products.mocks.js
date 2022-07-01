@@ -11,6 +11,6 @@ const data = [
     id: 3,
     name: 'Escudo do Capitão América',
   }
-]
+];
 
 module.exports = { data };
