@@ -49,10 +49,6 @@ describe('Camada de Products-Model', () => {
   })
 
   describe('Testa a função #delete', () => {
-    it('Testa se ao tentar deletar um item inexistente retorna um erro', () => {
-      sinon.stub(connection, 'query').resolves(null);
-      return expect(productsModel.delete(1001)).to.eventually.be.rejectedWith(NotFoundError);
-    })
     it('Testa se é possível deletar um produto', async () => {
       sinon.stub(connection, 'query').resolves(editado);
       const response = await productsModel.delete(editado.id);
