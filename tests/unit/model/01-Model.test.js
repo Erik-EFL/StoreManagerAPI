@@ -1,13 +1,14 @@
 const { productsModel } = require('../../../models/productsModel');
 const { connection } = require('../../../models/connection');
-const { data, teste } = require('../mocks/products.mocks')
+const { data, editado } = require('../mocks/products.mocks')
 
 const sinon = require('sinon');
 const chaiAsPromised = require('chai-as-promised');
 const { expect, use } = require('chai');
+const NotFoundError = require('../../../middlewares/error/NotFoundError');
 use(chaiAsPromised);
 
-describe('Requisito 1 Model', () => {
+describe('Camada de Products-Model', () => {
   beforeEach(() => {
     sinon.restore();
   });
@@ -41,17 +42,21 @@ describe('Requisito 1 Model', () => {
 
   describe('Testa a função #edit', () => {
     it('Testa se é possível editar um produto', async () => {
-      sinon.stub(connection, 'query').resolves(teste);
-      const response = await productsModel.edit(teste.id, teste.name);
-      expect(response).to.be.equal(teste);
+      sinon.stub(connection, 'query').resolves(editado);
+      const response = await productsModel.edit(editado.id, editado.name);
+      expect(response).to.be.equal(editado);
     })
   })
 
   describe('Testa a função #delete', () => {
+    it('Testa se ao tentar deletar um item inexistente retorna um erro', () => {
+      sinon.stub(connection, 'query').resolves(null);
+      return expect(productsModel.delete(1001)).to.eventually.be.rejectedWith(NotFoundError);
+    })
     it('Testa se é possível deletar um produto', async () => {
-      sinon.stub(connection, 'query').resolves(teste);
-      const response = await productsModel.delete(teste.id);
-      expect(response).to.be.equal(teste);
+      sinon.stub(connection, 'query').resolves(editado);
+      const response = await productsModel.delete(editado.id);
+      expect(response).to.be.equal(editado);
     })
   })
 })

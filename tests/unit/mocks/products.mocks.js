@@ -13,10 +13,14 @@ const data = [
   }
 ];
 
-const teste = {
+const editado = {
   id: 4,
   name: 'Produto Teste',
 }
 
+const excluído = {
+  //
+}
 
-module.exports = { data, teste };
+
+module.exports = { data, editado, excluído };
