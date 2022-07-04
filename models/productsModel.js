@@ -23,10 +23,8 @@ const productsModel = {
 
   edit: async (id, changes) => {
     const dbQuery = 'UPDATE StoreManager.products SET name ? WHERE id = ?';
-
-    await connection.query(dbQuery, [changes.name, id]);
-    const editedProduct = await this.listById(id);
-    return editedProduct;
+    const response = await connection.query(dbQuery, [changes.name, id]);
+    return response;
   },
 
   delete: async (id) => {
