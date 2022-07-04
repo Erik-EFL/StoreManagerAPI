@@ -1,14 +1,28 @@
 [
   {
-    "_id": "268e37c8-6206-4048-9162-70da01d37a89",
+    "_id": "1fbe1e68-1fe4-427a-b4a7-8daab7a217d7",
     "colId": "history",
     "containerId": "",
-    "name": "https://www.thunderclient.com/localhost:3000",
-    "url": "https://www.thunderclient.com/localhost:3000/",
+    "name": "localhost:3000/produtcts",
+    "url": "localhost:3000/products/1",
     "method": "GET",
     "sortNum": 0,
-    "created": "2022-06-29T22:39:48.739Z",
-    "modified": "2022-06-29T22:42:16.089Z",
+    "created": "2022-07-01T19:07:59.510Z",
+    "modified": "2022-07-04T00:15:43.865Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "57f93b86-a03f-4599-915a-a59fdbe393ee",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/",
+    "url": "localhost:3000/products",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-07-01T19:08:11.615Z",
+    "modified": "2022-07-01T19:27:05.437Z",
     "headers": [],
     "params": [],
     "tests": []
