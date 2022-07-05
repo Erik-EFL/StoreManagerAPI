@@ -1,4 +1,4 @@
-const { Router } = require('express');
+/* const { Router } = require('express');
 const { sales } = require('../controllers/sales.controller');
 
 const sale = Router();
@@ -14,3 +14,4 @@ sale.put('/:id', sales.edit);
 sale.delete('/:id', sales.delete);
 
 module.exports = sale;
+ */

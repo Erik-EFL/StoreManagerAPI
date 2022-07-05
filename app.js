@@ -11,7 +11,7 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-app.use('/sales', routes.sale);
+// app.use('/sales', routes.sale);
 app.use('/products', routes.products);
 
 app.use(middlewareError);
