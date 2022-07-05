@@ -1,4 +1,4 @@
-const { connection } = require('./connection');
+const connection = require('./connection');
 
 const productsModel = {
   list: async () => {
@@ -14,24 +14,27 @@ const productsModel = {
   },
 
   create: async (name) => {
-    if (!name) return null;
+    /* Ajuda do Danillo e Wendryo para corrigir um bug no qual estava desestruturando
+      2 vezes
+    */
     const dbQuery = 'INSERT INTO StoreManager.products (name) VALUES (?)';
     const [{ insertId }] = await connection.query(dbQuery, [name]);
-
     return { id: insertId, name };
   },
 
-  edit: async (id, changes) => {
-    const dbQuery = 'UPDATE StoreManager.products SET name ? WHERE id = ?';
-    const response = await connection.query(dbQuery, [changes.name, id]);
-    return response;
+  edit: async (id, name) => {
+    /* Ajuda do Danillo e Wendryo para corrigir um bug no qual estava desestruturando
+      2 vezes
+    */
+    const dbQuery = 'UPDATE StoreManager.products SET name = ? WHERE id = ?';
+    const [{ affectedRows }] = await connection.query(dbQuery, [name, id]);
+    return { affectedRows, product: { id, name } };
   },
 
   delete: async (id) => {
-    const dbQuery = 'SELECT * FROM StoreManager.products WHERE id = ?';
-
-    const removed = await connection.query(dbQuery, [id]);
-    return removed;
+    const dbQuery = 'DELETE FROM StoreManager.products WHERE id = ?';
+    const [{ affectedRows }] = await connection.query(dbQuery, [id]);
+    return affectedRows;
   },
 };
 

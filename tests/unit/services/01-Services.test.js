@@ -1,6 +1,6 @@
 const { productsModel } = require('../../../models/productsModel');
 const { productsServices } = require('../../../services/productsServices');
-const { data, editado, excluído } = require('../mocks/products.mocks')
+const { data, editado } = require('../mocks/products.mocks')
 
 const sinon = require('sinon');
 const chaiAsPromised = require('chai-as-promised');
@@ -21,7 +21,9 @@ describe('Camada de Products-Services ', () => {
   });
 
   describe('Testa a função #listById', () => {
-
+      beforeEach(() => {
+        sinon.restore();
+      });
     it('Testa se retorna um objeto especifico ao pesquisar por Id', () => {
       sinon.stub(productsModel, 'listById').resolves(data);
       return expect(productsServices.listById(2)).to.eventually.deep.equal(data);

@@ -1,7 +1,19 @@
+const Joi = require('joi');
 const { productsModel } = require('../models/productsModel');
 const NotFoundError = require('../middlewares/error/NotFoundError');
+const { runSchema } = require('../middlewares/validator');
 
 const productsServices = {
+  validateParamsId: runSchema(Joi.object({
+    id: Joi.number().required().positive().integer(),
+  })),
+
+  validateBody: runSchema(
+    Joi.object({
+      name: Joi.string().min(5).required(),
+    }),
+  ),
+
   list: async () => {
     const itens = await productsModel.list();
     return itens;
@@ -13,22 +25,22 @@ const productsServices = {
     return data;
   },
 
-  create: async (data) => {
-    const { name } = data;
+  create: async (name) => {
     const response = await productsModel.create(name);
     return response;
   },
 
-  edit: async (id, changes) => {
-    // if (!Object.keys(changes).length) throw new NotFoundError('No changes to update');
-    const { name } = changes;
+  edit: async (id, name) => {
     const response = await productsModel.edit(id, name);
-    return response;
+    if (!response.affectedRows) {
+      throw new NotFoundError('Product not found');
+    }
+    return response.product;
   },
 
   delete: async (id) => {
     const response = await productsModel.delete(id);
-    if (!response) throw new NotFoundError('Error deleting, this product may not exist');
+    if (!response) throw new NotFoundError('Product not found');
     return true;
   },
 };

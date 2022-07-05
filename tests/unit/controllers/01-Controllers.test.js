@@ -93,7 +93,7 @@ describe('Camada de Products-Controller', () => {
 
       await productsController.delete(req, res)
 
-      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.status.calledWith(204)).to.be.true;
       expect(res.json.calledWith(data)).to.be.true;
     })
   })
