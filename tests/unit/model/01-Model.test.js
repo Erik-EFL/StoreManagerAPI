@@ -1,4 +1,4 @@
-const { productsModel } = require('../../../models/productsModel');
+const { productsModel } = require('../../../models/products.model');
 const { data, editado } = require('../mocks/products.mocks')
 
 const sinon = require('sinon');
@@ -37,8 +37,8 @@ describe('Camada de Products-Model', () => {
 
   describe('Testa a função #edit', () => {
     it('Testa se é possível editar um produto', async () => {
-      sinon.stub(connection, 'query').resolves(editado);
-      expect(productsModel.edit(editado.id, editado.name)).to.eventually.be.deep.equal(editado);
+      sinon.stub(connection, 'query').resolves([{ affectedRows: 1 }]);
+      expect(productsModel.edit(editado.product.id, editado.product.name)).to.eventually.be.deep.equal(editado);
     })
   })
 

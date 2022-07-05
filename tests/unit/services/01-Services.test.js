@@ -1,5 +1,5 @@
-const { productsModel } = require('../../../models/productsModel');
-const { productsServices } = require('../../../services/productsServices');
+const { productsModel } = require('../../../models/products.model');
+const { productsServices } = require('../../../services/products.services');
 const { data, editado } = require('../mocks/products.mocks')
 
 const sinon = require('sinon');
@@ -47,9 +47,13 @@ describe('Camada de Products-Services ', () => {
   })
 
   describe('Testa a função #edit', () => {
+    it('Testa se é possível editar um produto inexistente', () => {
+      sinon.stub(productsModel, 'edit').resolves(editado.affectedRows);
+      return expect(productsServices.edit({id: 1001})).to.eventually.rejectedWith(NotFoundError);
+    })
     it('Testa se é possível editar um produto', () => {
       sinon.stub(productsModel, 'edit').resolves(editado)
-      return expect(productsServices.edit(editado.id, editado.name)).to.eventually.deep.equal(editado);
+      return expect(productsServices.edit(editado.product.id, editado.product.name)).to.eventually.deep.equal({ id: 1, name: 'Martelo do Batman' });
     })
   })
 

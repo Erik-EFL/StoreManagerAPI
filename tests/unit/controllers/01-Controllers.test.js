@@ -1,5 +1,5 @@
-const { productsController } = require('../../../controllers/productsControllers');
-const { productsServices } = require('../../../services/productsServices');
+const { productsController } = require('../../../controllers/products.controller');
+const { productsServices } = require('../../../services/products.services');
 const { data } = require('../mocks/products.mocks')
 const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');

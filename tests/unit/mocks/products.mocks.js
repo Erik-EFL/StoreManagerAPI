@@ -13,10 +13,7 @@ const data = [
   }
 ];
 
-const editado = {
-  id: 4,
-  name: 'Produto Teste',
-}
+const editado = { affectedRows: 1, product: { id: 1, name: 'Martelo do Batman' } }
 
 const excluído = {
   //
